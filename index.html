@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A beautiful Hello India greeting page showcasing Indian culture and heritage">
+    <meta name="keywords" content="India, greeting, hello, culture, heritage">
+    <title>Hello India - Welcome to Incredible India</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Background elements -->
+    <div class="background-elements">
+        <div class="floating-element element-1"></div>
+        <div class="floating-element element-2"></div>
+        <div class="floating-element element-3"></div>
+        <div class="floating-element element-4"></div>
+    </div>
+
+    <!-- Main container -->
+    <main class="container">
+        <!-- Header section -->
+        <header class="header">
+            <div class="flag-container">
+                <div class="flag">
+                    <div class="flag-stripe saffron"></div>
+                    <div class="flag-stripe white">
+                        <div class="chakra"></div>
+                    </div>
+                    <div class="flag-stripe green"></div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main content -->
+        <section class="main-content">
+            <div class="greeting-card">
+                <h1 class="main-title">
+                    <span class="hello-text">Hello</span>
+                    <span class="india-text">India</span>
+                </h1>
+                
+                <div class="subtitle-container">
+                    <p class="subtitle">नमस्ते भारत</p>
+                    <p class="tagline">Welcome to Incredible India</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">🏛️</div>
+                        <span class="feature-text">Rich Heritage</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🌶️</div>
+                        <span class="feature-text">Diverse Culture</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🕉️</div>
+                        <span class="feature-text">Spiritual Land</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🎨</div>
+                        <span class="feature-text">Vibrant Arts</span>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="showMessage()">
+                        Explore India
+                    </button>
+                    <button class="btn btn-secondary" onclick="playSound()">
+                        🔊 Listen
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer-text">
+                Unity in Diversity • भारत माता की जय
+            </p>
+            <div class="social-links">
+                <span class="social-icon">🌟</span>
+                <span class="social-icon">🎭</span>
+                <span class="social-icon">🏔️</span>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Success message modal -->
+    <div id="messageModal" class="modal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeMessage()" aria-label="Close modal">&times;</button>
+            <h2 id="modalTitle">🙏 Namaste!</h2>
+            <p>India welcomes you with open arms. Experience the land of diverse cultures, ancient wisdom, and boundless hospitality!</p>
+            <button class="btn btn-primary" onclick="closeMessage()">Dhanyawad</button>
+        </div>
+    </div>
+
+    <!-- JavaScript for interactions -->
+    <script>
+        // Show welcome message
+        function showMessage() {
+            const modal = document.getElementById('messageModal');
+            modal.style.display = 'flex';
+            modal.setAttribute('aria-hidden', 'false');
+            
+            // Add animation class
+            setTimeout(() => {
+                modal.querySelector('.modal-content').classList.add('modal-animate');
+            }, 10);
+            
+            // Focus management for accessibility
+            modal.querySelector('.modal-close').focus();
+        }
+
+        // Close message modal
+        function closeMessage() {
+            const modal = document.getElementById('messageModal');
+            const content = modal.querySelector('.modal-content');
+            
+            content.classList.remove('modal-animate');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                modal.setAttribute('aria-hidden', 'true');
+            }, 300);
+        }
+
+        // Play greeting sound (simulated)
+        function playSound() {
+            const btn = event.target;
+            btn.classList.add('btn-pulse');
+            
+            // Simulate sound playing with visual feedback
+            btn.innerHTML = '🔊 Playing...';
+            
+            setTimeout(() => {
+                btn.innerHTML = '🔊 Listen';
+                btn.classList.remove('btn-pulse');
+            }, 2000);
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeMessage();
+            }
+        });
+
+        // Close modal on outside click
+        document.getElementById('messageModal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeMessage();
+            }
+        });
+
+        // Add scroll-based animations
+        window.addEventListener('scroll', function() {
+            const elements = document.querySelectorAll('.feature-item');
+            elements.forEach((element, index) => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 50) {
+                    setTimeout(() => {
+                        element.classList.add('animate-in');
+                    }, index * 100);
+                }
+            });
+        });
+
+        // Initialize page animations
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+            
+            // Trigger initial animations
+            setTimeout(() => {
+                document.querySelector('.main-title').classList.add('title-animate');
+            }, 500);
+            
+            setTimeout(() => {
+                document.querySelector('.greeting-card').classList.add('card-animate');
+            }, 800);
+        });
+
+        // Add ripple effect to buttons
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('ripple');
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+    </script>
+</body>
+</html>
